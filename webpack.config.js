@@ -51,6 +51,15 @@ module.exports = {
             }
           }
         ]
+      }, 
+      {
+        /*  语法检查使用eslint-loader eslint eslint-plugin-airbnb-base 
+        eslint-plugin-import
+        */
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+        options: {}
       }
     ]
   },
@@ -64,11 +73,18 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
+      minify: {
+        // 移除空格
+        collapseWhitespace: true,
+        // 移除注释
+        removeComments: true
+      }
     }),
     new MiniCssExtractPlugin({
       filename: 'css/build.css'
     })
   ],
-  mode: 'development'
+  // mode: 'development'
+  mode: 'production'
 }
